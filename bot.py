@@ -1,5 +1,6 @@
 from secret import BOTPASSWORD
 import dota2
+import bot_functions
 from steam.client import SteamClient
 from dota2.client import Dota2Client
 from dota2.enums import DOTAChatChannelType_t
@@ -15,8 +16,7 @@ def start_dota():
 
 @dota.on('ready')
 def create_practice_lobby():
-    dota.leave_practice_lobby()
-    dota.create_practice_lobby(password="h", options=None)
+    bot_functions.create_lobby(dota, "Testing123", "Password")
     print("practice Lobby Made")
     dota.invite_to_lobby(76561198050409028)
     # dota.invite_to_lobby(76561198048107269)
