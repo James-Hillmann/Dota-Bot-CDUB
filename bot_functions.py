@@ -1,10 +1,13 @@
-
-
-def create_lobby(dota, name, password):
+def lobbySetup(dota):
     dota.abandon_current_game()
     dota.sleep(1)
     dota.leave_practice_lobby()
     dota.sleep(1)
+
+
+
+def create_lobby(dota, name, password):
+    lobbySetup(dota)
     dota.create_tournament_lobby(password=password, tournament_game_id=None, tournament_id=0, options={
         'allow_cheats': False,
         'visibility': 0,  # 0 -> Public, 1 -> Friends, 2 -> Unlisted
@@ -20,7 +23,21 @@ def create_lobby(dota, name, password):
     dota.sleep(1)
     dota.channels.join_lobby_channel()
     dota.sleep(1)
+    print("Practice Lobby Made")
 
+
+def create_1v1_lobby(dota, name, password):
+    lobbySetup(dota)
+    dota.create_tournament_lobby(password = password, tournament_game_id = None, tournament_id = 0, options={
+        'allow_cheats' : False,
+        'visibility' : 0,
+        'server_retgion' : 2,
+        'game_mode' : 13,
+        'game_name' : name,
+        'fill_with_bots' : False,
+        'dota_tv_delay' : 0,
+        'allow_spectating' : True
+    })
 
 if __name__ == "__main__":
     print("RUN IT IN MAIN YOU IDIOT")

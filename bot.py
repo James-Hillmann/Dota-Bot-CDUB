@@ -1,4 +1,4 @@
-from secret import BOTPASSWORD
+import secret
 import dota2
 import bot_functions
 from steam.client import SteamClient
@@ -17,22 +17,28 @@ def start_dota():
 @dota.on('ready')
 def create_practice_lobby():
     bot_functions.create_lobby(dota, "Testing123", "Password")
-    print("practice Lobby Made")
     dota.invite_to_lobby(76561198050409028)
+    #muffin
+    #dota.invite_to_lobby(76561198104057566)
     # dota.invite_to_lobby(76561198048107269)
-    dota.join_practice_lobby_broadcast_channel(channel=1)
+    #dota.join_practice_lobby_broadcast_channel(channel=1)
+
+@dota.on('message')
+def on_message(message):
+    print(message)
+
+@dota.on('lobby_new')
+def on_lobby_join(lobby):
+    # Leave player slot
+    print(f"Joined lobby: {lobby.lobby_id}")
+    dota.join_practice_lobby_team(slot=1)
 
 
-@dota.channels.on(dota2.features.chat.ChannelManager.EVENT_MESSAGE)
-def chat_message(channel, msg_obj):
-    print("got message")
-    text = msg_obj.text
-    if channel.type != DOTAChatChannelType_t.DOTAChannelType_Lobby:
-        return  # ignore postgame and other chats
-    print(text)
-
+@dota.on('lobby_changed')
+def lobby_change(lobby):
+    print("lobby Changed")
 
 print("Logging in.....")
-client.login("TheSmallNut", BOTPASSWORD)
+client.login("TheSmallNut", secret.BOTPASSWORD)
 print("Logged in")
 client.run_forever()
