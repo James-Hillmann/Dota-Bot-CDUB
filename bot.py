@@ -14,6 +14,10 @@ def start_dota():
     dota.launch()
 
 
+# https://github.com/ziadoma/dota_hoster/blob/c35b553ec8232b374a0493f199caec3613fa30fd/main.py
+# https://github.com/ValvePython/dota2/blob/6cb1008f3070e008e9bed9521fad8d1438123aa1/protobufs/dota_gcmessages_client_chat.proto#L86-L122
+
+
 @dota.on('ready')
 def create_practice_lobby():
     bot_functions.create_lobby(dota, "Testing123", "Password")
