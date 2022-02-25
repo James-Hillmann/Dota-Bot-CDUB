@@ -18,6 +18,11 @@ def start_dota():
 # https://github.com/ValvePython/dota2/blob/6cb1008f3070e008e9bed9521fad8d1438123aa1/protobufs/dota_gcmessages_client_chat.proto#L86-L122
 
 
+def inviteToLobby(listOfPlayers):
+    for player in listOfPlayers:
+        dota.invite_to_lobby(player)
+
+
 @dota.on('ready')
 def create_practice_lobby():
     bot_functions.create_lobby(dota, "Testing123", "Password")
